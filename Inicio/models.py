@@ -15,6 +15,7 @@ class Inasistencia(models.Model):
     descripcion = models.CharField(max_length=300)
     imagen = models.ImageField(upload_to='media/inasistencias', null=True)
     fecha = models.DateTimeField(null=True)
+    estado = models.CharField(max_length=10, choices=settings.ESTADOS, default='pendiente')
     
     def __str__(self):
         return self.descripcion

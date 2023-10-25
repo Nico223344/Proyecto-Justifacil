@@ -13,6 +13,7 @@ urlpatterns = [
   # pagina Usuario
   path('home/', views.home, name='home'),
   path('home/inasistencia/', views.home_inasistencia, name='home_inasistencia'),
+  path('home/historial/', views.historial_inasistencias, name='historial_inasistencias'),
   
   # pagina administrador
   path('administrador/', viewsAdmin.index, name='admin_index'),

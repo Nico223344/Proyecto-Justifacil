@@ -89,4 +89,9 @@ def home_inasistencia(request):
         return redirect('home_inasistencia')
     else:
         return render(request, 'inasistencia.html')
+    
+#Historial de inasistencia 
+def historial_inasistencias(request):
+    inasistencias = Inasistencia.objects.filter(estudiante=request.user)
+    return render(request, 'historial_inasistencias.html', {'inasistencias': inasistencias})
 

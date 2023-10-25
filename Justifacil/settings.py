@@ -134,10 +134,15 @@ ROLES = (
     ('estudiante', 'Estudiante'),
     ('profesor', 'Profesor'),
     ('Director', 'Director'),
-
 )
 
+ESTADOS = (
+        ('pendiente', 'Pendiente'),
+        ('aprobado', 'Aprobado'),
+        ('rechazado', 'Rechazado'),
+    )
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'biblioteca/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'Inicio/static')]
 
 CORS_ORIGIN_ALLOW_ALL = True
