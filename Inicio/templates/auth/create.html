@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body">
                 <p class="fw-light text-center">
-                    Registro de usuarios <br>  <strong>📚 megabiblioteca.cl 📚</strong> 
+                    Registro de usuarios <br>  <strong>📚 JustiFacil 📚</strong> 
                 </p>
                 <form action="{% url 'registrar' %}" method="POST">
                     {% csrf_token %}
@@ -63,6 +63,8 @@
                         <select class="custom-select form-select" name="tipo" id="tipo" required>
                             <option value="admin">Admin</option>
                             <option value="estudiante">Estudiante</option>
+                            <option value="admin">Profesor</option>
+                            <option value="estudiante">Director y coordinador</option>
                         </select>
                     </div>
             

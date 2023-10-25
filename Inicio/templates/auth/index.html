@@ -2,13 +2,7 @@
 {% load static %}
 
 {% block css %}
-    <style>
-        body {
-            background-image: url("{% static 'img/biblioteca.jpeg' %}");
-            background-size: cover; /* Para que la imagen cubra todo el fondo */
-            background-repeat: no-repeat; /* Evita que la imagen se repita */
-        }
-    </style>
+   
 {% endblock %}
 
 {% block contenido %}
@@ -30,7 +24,7 @@
       </div>
     </div>
 </nav>
-
+<br><br><br><br><br><br><br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4 mt-5">
@@ -38,7 +32,6 @@
                 <div class="card-body">
                 <p class="fw-light text-center">
                     Iniciar Sesión <br>
-                    <strong>📚 📚</strong>
                 </p>
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
@@ -76,6 +69,6 @@
         </div>
     </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 {% endblock %}
     

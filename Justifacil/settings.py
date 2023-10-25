@@ -132,6 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ROLES = (
     ('admin', 'Administrador'),
     ('estudiante', 'Estudiante'),
+    ('profesor', 'Profesor'),
+    ('Director', 'Director'),
+
 )
 
 STATIC_URL = '/static/'
