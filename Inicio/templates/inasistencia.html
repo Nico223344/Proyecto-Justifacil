@@ -1,0 +1,161 @@
+{% extends 'layouts/normal/base.html' %}
+{% load static %}
+
+{% block css %}
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, 0.1);
+      border: solid rgba(0, 0, 0, 0.15);
+      border-width: 1px 0;
+      box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1), inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -0.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+{% endblock %}
+
+{% block contenido %}
+  <nav class="navbar navbar-expand-lg bg-body-tertiary " >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="https://t9003039734.p.clickup-attachments.com/t9003039734/ea205aeb-a142-49ee-a7c9-555112fa3c66/JUSTIFACIL3-LOGO.png" width="200" alt="">
+        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            {% if perfil == 'estudiante' or perfil == 'admin' %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Historial de inasistencia</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          
+            <form class="d-flex" role="search" >
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle fas fa-user" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ request.user.first_name }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <div>
+                        {% if perfil == 'admin' %}
+                            <a type="button" class="btn btn-sm " href="{% url 'admin_index' %}">Administrador</a>
+                        {% endif %}
+                      </div>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a type="button" class="btn btn-sm " href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    
+                    </ul>
+                </li>
+            </form>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container"> 
+    <h1> Justificativo De Inasistencia</h1>
+    {% include 'partials/_back.html' with url='/home' name='Crear Justificativo' %}
+    <div class="row"> 
+      <div class="col-12">
+        <div class="card" >
+          <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" cols="10" row="10" id="descripcion" name="descripcion" required/>
+              </div>
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                  <input type="file" class="form-control" id="imagen" name="imagen" required/>
+              </div>
+              <div class="mb-3">
+                <label for="fecha" class="form-label">fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" required/>
+              </div>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+  <main>
+    
+
+  </main>
+{% endblock %}
