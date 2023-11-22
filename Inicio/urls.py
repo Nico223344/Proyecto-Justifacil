@@ -19,6 +19,8 @@ urlpatterns = [
   path('administrador/', viewsAdmin.index, name='admin_index'),
   path('administrador/inasistencia/', viewsAdmin.admin_lista_inasistencia, name='admin_lista_inasistencia'),
   path('administrador/inasistencia/create', viewsAdmin.admin_create_inasistencia, name='admin_create_inasistencia'),
+  path('administrador/inasistencia/<int:id>/edit', viewsAdmin.admin_edit_inasistencia, name='admin_edit_inasistencia'),
+  path('administrador/inasistencia/<int:id>/delete', viewsAdmin.admin_delete_inasistencia, name='admin_delete_inasistencia'),
 
 
 
