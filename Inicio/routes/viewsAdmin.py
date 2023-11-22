@@ -13,13 +13,16 @@ def admin_lista_usuario(request):
     usuarios = UserProfile.objects.all()
     return render(request, 'administrador/usuario/index.html', {'usuarios': usuarios})
 
+
 def admin_create_usuario(request):
     if request.method == 'POST':
-        user = request.POST['user']
+        # Obtén el username y el rol del formulario
+        username = request.POST['username']
         rol = request.POST.get('rol')
         
-        usuario = UserProfile.objects.create(user=user, rol=rol)
-        usuario.save()
+        # Crea un nuevo usuario y un UserProfile asociado
+        usuario = User.objects.get(username=request.POST['user'])
+        UserProfile.objects.create(user=usuario, role=rol)
         
         messages.success(request, 'Creado correctamente')
         return redirect('admin_lista_usuario')
@@ -27,17 +30,14 @@ def admin_create_usuario(request):
         return render(request, 'administrador/usuario/create.html')
     
 def admin_edit_usuario(request, id):
-    usuario = get_object_or_404(UserProfile, id=id)
-    
+    usuario = UserProfile.objects.get(id=id)
     if request.method == 'POST':
         rol = request.POST.get('rol')
-        if rol in [choice[0] for choice in usuario.ROLES]:
-            usuario.role = rol
-            usuario.save()
-            messages.success(request, 'Editado correctamente')
-        else:
-            messages.error(request, 'Rol no válido')
-    
+
+        usuario.role = rol
+        usuario.save()
+        messages.success(request, 'Editado correctamente')
+
     context = {'usuario': usuario}
     return render(request, 'administrador/usuario/edit.html', context)
 

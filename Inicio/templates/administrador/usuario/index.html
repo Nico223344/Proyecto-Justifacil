@@ -10,16 +10,8 @@
         <li class="nav-item">
           <a class="nav-link active" href="#">Usuarios</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'admin_create_usuario' %}">Nuevo</a>
-        </li>
       </ul>
       <div class="card">
-        {% comment %} <div class="card-header">
-          {% endcomment %}
-          {% comment %} <a href="{% url 'categorias.create' %}" class="btn btn-primary">Crear</a> {% endcomment %}
-          {% comment %}
-        </div> {% endcomment %}
         <table class="table table-bordered mt-4">
           <thead>
             <tr>
@@ -30,13 +22,12 @@
             </tr>
           </thead>
           <tbody>
-            {% for inasistencia in inasistencias %}
+            {% for usuario in usuarios %}
               <tr>
                 <td>{{ usuario.id }}</td>
-                <td>{{ usuario.user }}</td>
+                <td>{{ usuario.user.username }}</td>
                 <td>{{ usuario.role }}</td>
                 <td>
-                  <a href="{% url 'admin_edit_usuario' id=usuario.id %}" class="btn btn-info btn-sm">Modificar</a>
                   <a href="{% url 'admin_delete_usuario' id=usuario.id %}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
               </tr>

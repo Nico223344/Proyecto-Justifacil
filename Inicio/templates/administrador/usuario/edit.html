@@ -3,24 +3,30 @@
 
 {% block contenido %}
   <div class="container">
-      <div class="row">
-        {% include 'partials/_back.html' with url='/administrador/usuarios' name='Volver a Usuarios' %}
-        <div class="col-md-6">
-            <div class="card">
-                <form action="{% url 'admin_edit_usuario' id=usuario.id %}" method="POST">
-                  {% csrf_token %}
-                  <div class="mb-3">
-                    <label for="rol" class="form-label">Rol</label>
-                    <select class="form-select" id="rol" name="rol" required>
-                      {% for choice in usuario.ROLES %}
-                        <option value="{{ choice.0 }}" {% if choice.0 == usuario.role %}selected{% endif %}>{{ choice.1 }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                </form>
+    <div class="row">
+      <h1 class="mt-2">Editar Usuario</h1>
+      {% include 'layouts/_alert.html' %}
+      <div class="card">
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+              <label for="user">Nombre de usuario:</label>
+              <input type="text" id="user" name="user" value="{{ usuario.user.username }}" required>
             </div>
+            <div class="form-group mb-3">
+              <label for="tipo" class="form-label">Rol</label>
+              <select class="custom-select form-select" name="tipo" id="tipo" required>
+                  <option value="admin">Admin</option>
+                  <option value="estudiante">Estudiante</option>
+                  <option value="admin">Profesor</option>
+                  <option value="estudiante">Director y coordinador</option>
+              </select>
+          </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 {% endblock %}
