@@ -1,0 +1,26 @@
+{% extends 'layouts/admin/app.html' %}
+{% load static %}
+
+{% block contenido %}
+  <div class="container">
+      <div class="row">
+        {% include 'partials/_back.html' with url='/administrador/usuarios' name='Volver a Usuarios' %}
+        <div class="col-md-6">
+            <div class="card">
+                <form action="{% url 'admin_edit_usuario' id=usuario.id %}" method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-select" id="rol" name="rol" required>
+                      {% for choice in usuario.ROLES %}
+                        <option value="{{ choice.0 }}" {% if choice.0 == usuario.role %}selected{% endif %}>{{ choice.1 }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

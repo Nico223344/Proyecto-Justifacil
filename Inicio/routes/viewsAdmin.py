@@ -9,6 +9,44 @@ def index(request):
     return render(request, 'administrador/index.html')
 
 # USUARIO
+def admin_lista_usuario(request):
+    usuarios = UserProfile.objects.all()
+    return render(request, 'administrador/usuario/index.html', {'usuarios': usuarios})
+
+def admin_create_usuario(request):
+    if request.method == 'POST':
+        user = request.POST['user']
+        rol = request.POST.get('rol')
+        
+        usuario = UserProfile.objects.create(user=user, rol=rol)
+        usuario.save()
+        
+        messages.success(request, 'Creado correctamente')
+        return redirect('admin_lista_usuario')
+    else:
+        return render(request, 'administrador/usuario/create.html')
+    
+def admin_edit_usuario(request, id):
+    usuario = get_object_or_404(UserProfile, id=id)
+    
+    if request.method == 'POST':
+        rol = request.POST.get('rol')
+        if rol in [choice[0] for choice in usuario.ROLES]:
+            usuario.role = rol
+            usuario.save()
+            messages.success(request, 'Editado correctamente')
+        else:
+            messages.error(request, 'Rol no válido')
+    
+    context = {'usuario': usuario}
+    return render(request, 'administrador/usuario/edit.html', context)
+
+def admin_delete_usuario(request, id):
+    usuario = UserProfile.objects.get(id=id)
+    usuario.delete()
+    usuarios = UserProfile.objects.all()
+    messages.warning(request, 'Eliminado correctamente')
+    return render(request, 'administrador/usuario/index.html', {"usuarios":usuarios})
 
 # INASISTENCIA
 def admin_lista_inasistencia(request):
@@ -53,6 +91,5 @@ def admin_delete_inasistencia(request, id):
     inasistencias = Inasistencia.objects.all()
     messages.warning(request, 'Eliminado correctamente')
     return render(request, 'administrador/inasistencia/lista.html', {"inasistencias":inasistencias})
-
 
 

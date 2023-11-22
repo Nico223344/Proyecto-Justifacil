@@ -1,0 +1,49 @@
+{% extends 'layouts/admin/app.html' %}
+{% load static %}
+
+{% block contenido %}
+  <div class="container">
+    <div class="row">
+      <h1 class="mt-2">Usuarios</h1>
+      {% include 'layouts/_alert.html' %}
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_create_usuario' %}">Nuevo</a>
+        </li>
+      </ul>
+      <div class="card">
+        {% comment %} <div class="card-header">
+          {% endcomment %}
+          {% comment %} <a href="{% url 'categorias.create' %}" class="btn btn-primary">Crear</a> {% endcomment %}
+          {% comment %}
+        </div> {% endcomment %}
+        <table class="table table-bordered mt-4">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inasistencia in inasistencias %}
+              <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.user }}</td>
+                <td>{{ usuario.role }}</td>
+                <td>
+                  <a href="{% url 'admin_edit_usuario' id=usuario.id %}" class="btn btn-info btn-sm">Modificar</a>
+                  <a href="{% url 'admin_delete_usuario' id=usuario.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
