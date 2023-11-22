@@ -48,4 +48,44 @@
     </div>
 </nav>
 
+<div class="container">
+    <div class="row">
+      <h1 class="mt-2">Inasistencias</h1>
+      {% include 'layouts/_alert.html' %}
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Inasistencias</a>
+        </li>
+      </ul>
+      <div class="card">
+        {% comment %} <div class="card-header">
+          {% endcomment %}
+          {% comment %} <a href="{% url 'categorias.create' %}" class="btn btn-primary">Crear</a> {% endcomment %}
+          {% comment %}
+        </div> {% endcomment %}
+        <table class="table table-bordered mt-4">
+          <thead>
+            <tr>
+              <th scope="col">Estudiante</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inasistencia in inasistencias %}
+              <tr>
+                <td>{{ inasistencia.estudiante.username }}</td>
+                <td>{{ inasistencia.descripcion }}</td>
+                <td>{{ inasistencia.fecha }}</td>
+                <td>{{ inasistencia.estado }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
 {% endblock %}

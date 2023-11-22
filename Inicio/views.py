@@ -49,7 +49,7 @@ def registar(request):
         password = request.POST.get('pass')
 
         user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
-
+    
         role = request.POST.get('tipo')
         UserProfile.objects.create(user=user, role=role)
 
@@ -77,12 +77,13 @@ def home_inasistencia(request):
     if request.method == 'POST':
         descripcion = request.POST['descripcion']
         imagen = request.FILES.get('imagen')
+        fecha = request.POST.get('fecha')
         
         
             
-        estudiante = User.objects.first()  # Esto obtiene el primer usuario, cambia esto según tus necesidades
+        estudiante = request.user
             
-        inasistencia = Inasistencia.objects.create(estudiante=estudiante, descripcion=descripcion, imagen=imagen)
+        inasistencia = Inasistencia.objects.create(estudiante=estudiante, descripcion=descripcion, imagen=imagen, fecha=fecha)
         inasistencia.save()
             
         messages.success(request, 'Creado correctamente')
@@ -93,5 +94,5 @@ def home_inasistencia(request):
 #Historial de inasistencia 
 def historial_inasistencias(request):
     inasistencias = Inasistencia.objects.filter(estudiante=request.user)
-    return render(request, 'historial_inasistencias.html', {'inasistencias': inasistencias})
+    return render(request, 'historial.html', {'inasistencias': inasistencias})
 
